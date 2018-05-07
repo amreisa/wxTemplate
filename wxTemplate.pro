@@ -21,6 +21,20 @@ INCLUDEPATH += "D:/Dev/Libs/wxWidgets-3.1.0/lib/gcc_lib/mswu"
 }
 }
 
+*-msvc* {
+CONFIG(debug, debug|release) {
+INCLUDEPATH += "D:/Dev/Libs/wxWidgets-3.1.0/lib/vc_lib/mswud"
+    wxCXXFLAGS = $$system(wx-config --prefix=D:/Dev/Libs/wxWidgets-3.1.0 --wxcfg=vc_lib\mswud --cxxflags --unicode=yes --debug=yes --static=yes)
+    wxLinkOptions = $$system(wx-config --prefix=D:/Dev/Libs/wxWidgets-3.1.0 --wxcfg=vc_lib\mswud --debug=yes --libs --unicode=yes --static=yes)
+}
+
+CONFIG(release, debug|release) {
+INCLUDEPATH += "D:/Dev/Libs/wxWidgets-3.1.0/lib/vc_lib/mswu"
+    wxCXXFLAGS = $$system(wx-config --prefix=D:/Dev/Libs/wxWidgets-3.1.0 --wxcfg=vc_lib\mswu --cxxflags --unicode=yes --debug=no --static=yes)
+    wxLinkOptions = $$system(wx-config --prefix=D:/Dev/Libs/wxWidgets-3.1.0 --wxcfg=vc_lib\mswu --debug=no --libs --unicode=yes --static=yes)
+}
+}
+
 LIBS += $$wxLinkOptions
 QMAKE_CXXFLAGS_RELEASE += $$wxCXXFLAGS
 QMAKE_CXXFLAGS_DEBUG += $$wxCXXFLAGS
